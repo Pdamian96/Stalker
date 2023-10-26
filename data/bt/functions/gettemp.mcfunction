@@ -93,6 +93,11 @@ execute if score @s furnace matches 1.. run scoreboard players remove @s bonus_i
 # Water Bonus
 # (In water from bt:in_water)
 
+execute if score @s in_water matches 30.. run scoreboard players remove @s bonus_insulation_cold 20
+execute if score @s in_water matches 30.. run scoreboard players add @s bonus_insulation_warm 20
+
+execute if score @s in_water matches 1.. run scoreboard players remove @s bonus_insulation_cold 10
+execute if score @s in_water matches 1.. run scoreboard players add @s bonus_insulation_warm 10
 
 
 

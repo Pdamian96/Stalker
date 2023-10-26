@@ -65,7 +65,8 @@ scoreboard players set @a base_insulation_cold 10
 
 scoreboard players set #0 constant 0
 scoreboard players set #1 constant 1
+scoreboard players set #2 constant 2
 scoreboard players set #5 constant 5
-
+scoreboard players set #10 constant 10
 
 say reloaded
