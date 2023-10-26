@@ -22,32 +22,23 @@ execute if biome ~ ~ ~ desert run scoreboard players set @s base_temp 30
 execute if biome ~ ~ ~ #is_savanna run scoreboard players set @s base_temp 20
 execute if biome ~ ~ ~ #is_jungle run scoreboard players set @s base_temp 20
 
+#Medium
+
 execute if biome ~ ~ ~ minecraft:plains run scoreboard players set @s base_temp 10
 execute if biome ~ ~ ~ #is_forest run scoreboard players set @s base_temp 10
 execute if biome ~ ~ ~ minecraft:beach run scoreboard players set @s base_temp 10
 
 
+#Cold
+
 execute if biome ~ ~ ~ #is_ocean run scoreboard players set @s base_temp 5
 execute if biome ~ ~ ~ #is_deep_ocean run scoreboard players set @s base_temp 5
 execute if biome ~ ~ ~ minecraft:river run scoreboard players set @s base_temp 5
-
-
 
 execute if biome ~ ~ ~ snowy_beach run scoreboard players set @s base_temp -5
 execute if biome ~ ~ ~ snowy_plains run scoreboard players set @s base_temp -5
 execute if biome ~ ~ ~ snowy_slopes run scoreboard players set @s base_temp -5
 execute if biome ~ ~ ~ snowy_taiga run scoreboard players set @s base_temp -5
-
-
-
-
-# Medium Biomes
-
-
-
-# Cold Biomes
-
-
 
 
 #----
@@ -70,6 +61,23 @@ execute if score time time matches 21001..21500 run scoreboard players set @s ti
 execute if score time time matches 21501..23500 run scoreboard players set @s time_temp -10
 execute if score time time matches 23501..24000 run scoreboard players set @s time_temp -5
 
+
+#
+# Other Bonuses
+#
+# Planned: Armor , Fire
+#
+#
+# Reset Bonus
+
+scoreboard players set @s bonus_insulation_cold 0
+scoreboard players set @s bonus_insulation_warm 0
+
+# Fire Bonus
+execute store result score @s campfires run clone ~-3 ~-2 ~-3 ~3 ~2 ~3 ~-3 ~-2 ~-3 filtered campfire[lit=true] force
+
+
+
 # Add stuff together
 
 
@@ -88,9 +96,18 @@ scoreboard players operation @s total_insulation_warm = @s base_insulation_warm
 # Insulation Rest Calculations
 
 
-execute if score @s body_temp > #0 constant run scoreboard players operation @s insulation_effect = @s body_temp
-execute if score @s body_temp > #0 constant run scoreboard players operation @s insulation_effect -= @s base_insulation_warm
-execute if score @s insulation_effect > #0 constant run function bt:temp_effects
+execute if score @s body_temp > #0 constant run scoreboard players operation @s temp_penalty_warm = @s body_temp
+execute if score @s body_temp > #0 constant run scoreboard players operation @s temp_penalty_warm -= @s total_insulation_warm
+execute if score @s temp_penalty_warm matches ..0 run scoreboard players set @s temp_penalty_warm 0
+execute if score @s temp_penalty_warm matches 1.. run function bt:temp_effects
+
+
+execute if score @s body_temp <= #0 constant run scoreboard players operation @s temp_penalty_cold = @s body_temp
+execute if score @s body_temp <= #0 constant run scoreboard players operation @s temp_penalty_cold += @s total_insulation_cold
+execute if score @s temp_penalty_cold matches 0.. run scoreboard players set @s temp_penalty_cold 0
+execute if score @s temp_penalty_cold matches ..1 run function bt:temp_effects
+
+
 
 
 

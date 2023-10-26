@@ -1,5 +1,10 @@
+
+
+# Re-Runs every 5 Seconds
+
+
 #
-#   Do Effects on player for insulation (tick)
+#   Do Effects on player for insulation (5s)
 #
 # Needs to be executed as player and at player
 #
@@ -15,4 +20,21 @@
 #
 
 
-#
+# Adds 
+scoreboard players operation @s insulation_effect += @s temp_penalty_warm
+scoreboard players operation @s insulation_effect += @s temp_penalty_cold
+
+
+
+say hi
+
+
+
+
+
+
+
+
+
+# Reschedule Function
+execute as @a run schedule function bt:temp_effects_tick 5s
