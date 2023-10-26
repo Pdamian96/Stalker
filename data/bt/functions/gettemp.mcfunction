@@ -104,7 +104,6 @@ execute if score @s in_water matches 1.. run scoreboard players add @s bonus_ins
 
 
 
-
 # ------------------------------------------------------------------------------------------------------------
 
 # Add stuff together
