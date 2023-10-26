@@ -35,10 +35,10 @@ execute if biome ~ ~ ~ #is_ocean run scoreboard players set @s base_temp 5
 execute if biome ~ ~ ~ #is_deep_ocean run scoreboard players set @s base_temp 5
 execute if biome ~ ~ ~ minecraft:river run scoreboard players set @s base_temp 5
 
-execute if biome ~ ~ ~ snowy_beach run scoreboard players set @s base_temp -5
-execute if biome ~ ~ ~ snowy_plains run scoreboard players set @s base_temp -5
-execute if biome ~ ~ ~ snowy_slopes run scoreboard players set @s base_temp -5
-execute if biome ~ ~ ~ snowy_taiga run scoreboard players set @s base_temp -5
+execute if biome ~ ~ ~ snowy_beach run scoreboard players set @s base_temp -10
+execute if biome ~ ~ ~ snowy_plains run scoreboard players set @s base_temp -10
+execute if biome ~ ~ ~ snowy_slopes run scoreboard players set @s base_temp -10
+execute if biome ~ ~ ~ snowy_taiga run scoreboard players set @s base_temp -10
 
 
 #----
@@ -62,21 +62,45 @@ execute if score time time matches 21501..23500 run scoreboard players set @s ti
 execute if score time time matches 23501..24000 run scoreboard players set @s time_temp -5
 
 
+# ------------------------------------------------------------------------------------------------------------
+
+
 #
 # Other Bonuses
 #
-# Planned: Armor , Fire
+# Planned: Armor , Fire , after sleeping get temp insulation , while in bed insulation, after being in water
 #
 #
+
+
+
 # Reset Bonus
 
 scoreboard players set @s bonus_insulation_cold 0
 scoreboard players set @s bonus_insulation_warm 0
 
-# Fire Bonus
+# Fire/furnace Bonus
 execute store result score @s campfires run clone ~-3 ~-2 ~-3 ~3 ~2 ~3 ~-3 ~-2 ~-3 filtered campfire[lit=true] force
+execute if score @s campfires matches 1.. run scoreboard players add @s bonus_insulation_cold 10
+execute if score @s campfires matches 1.. run scoreboard players remove @s bonus_insulation_warm 10
+
+execute store result score @s furnace run clone ~-3 ~-2 ~-3 ~3 ~2 ~3 ~-3 ~-2 ~-3 filtered furnace[lit=true] force
+execute if score @s furnace matches 1.. run scoreboard players add @s bonus_insulation_cold 5
+execute if score @s furnace matches 1.. run scoreboard players remove @s bonus_insulation_warm 5
 
 
+
+# Water Bonus
+# (In water from bt:in_water)
+
+
+
+
+
+
+
+
+# ------------------------------------------------------------------------------------------------------------
 
 # Add stuff together
 
@@ -90,8 +114,15 @@ scoreboard players operation @s body_temp += @s time_temp
 
 # Calc Insulation
 
+scoreboard players operation @s total_insulation_cold = #0 constant
+scoreboard players operation @s total_insulation_warm = #0 constant
+
+
 scoreboard players operation @s total_insulation_cold = @s base_insulation_cold
+scoreboard players operation @s total_insulation_cold += @s bonus_insulation_cold
+
 scoreboard players operation @s total_insulation_warm = @s base_insulation_warm
+scoreboard players operation @s total_insulation_warm = @s bonus_insulation_warm
 
 # Insulation Rest Calculations
 

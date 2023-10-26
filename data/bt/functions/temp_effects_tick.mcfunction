@@ -26,7 +26,6 @@ scoreboard players operation @s insulation_effect += @s temp_penalty_cold
 
 
 
-say hi
 
 
 

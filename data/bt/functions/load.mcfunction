@@ -15,7 +15,11 @@ scoreboard objectives add random dummy
 scoreboard objectives add math dummy
 scoreboard objectives add constant dummy
 
+# Block Stuff
 scoreboard objectives add campfires dummy
+scoreboard objectives add furnace dummy
+
+scoreboard objectives add in_water dummy
 
 
 scoreboard objectives add body_temp dummy
@@ -60,5 +64,8 @@ scoreboard players set @a base_insulation_cold 10
 # Constants
 
 scoreboard players set #0 constant 0
+scoreboard players set #1 constant 1
+scoreboard players set #5 constant 5
+
 
 say reloaded

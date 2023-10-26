@@ -3,7 +3,12 @@
 
 
 
-execute as @a run function bt:temp_effects_tick
+execute as @a run execute at @s run function bt:temp_effects_tick
+say test
 
 
-schedule function bt:loop_5s 3s 
+# Adds in water logic
+execute as @a run execute at @s run function bt:in_water
+
+
+schedule function bt:loop_5s 5s 
