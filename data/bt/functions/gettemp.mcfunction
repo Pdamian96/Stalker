@@ -68,9 +68,12 @@ execute if score time time matches 23501..24000 run scoreboard players set @s ti
 #
 # Other Bonuses
 #
-# Planned: Armor , Fire , after sleeping get temp insulation , while in bed insulation, after being in water
+# Planned: Armor
 #
+# Done: Fire, after being in water, while in bed insulation
 #
+
+
 
 
 
@@ -78,6 +81,43 @@ execute if score time time matches 23501..24000 run scoreboard players set @s ti
 
 scoreboard players set @s bonus_insulation_cold 0
 scoreboard players set @s bonus_insulation_warm 0
+
+
+#Armor Insulation
+
+
+#Leather
+
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_boots",Slot:100b}]}] run scoreboard players remove @s bonus_insulation_warm 5
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_boots",Slot:100b}]}] run scoreboard players add @s bonus_insulation_cold 5
+
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_leggings",Slot:101b}]}] run scoreboard players remove @s bonus_insulation_warm 5
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_leggings",Slot:101b}]}] run scoreboard players add @s bonus_insulation_cold 5
+
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_chestplate",Slot:102b}]}] run scoreboard players remove @s bonus_insulation_warm 5
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_chestplate",Slot:102b}]}] run scoreboard players add @s bonus_insulation_cold 5
+
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_helmet",Slot:103b}]}] run scoreboard players remove @s bonus_insulation_warm 5
+execute if entity @p[nbt={Inventory:[{id:"minecraft:leather_helmet",Slot:103b}]}] run scoreboard players add @s bonus_insulation_cold 5
+
+#Iron
+
+
+
+#while in bed insulation
+
+execute if score @s time_since_sleep matches 1.. run scoreboard players set @s sleep_time 0
+
+execute if score @s sleep_time matches 1.. run scoreboard players add @s bonus_insulation_warm 10
+execute if score @s sleep_time matches 1.. run scoreboard players add @s bonus_insulation_cold 10
+
+# Rain insulation
+
+execute if predicate bt:rain_check run scoreboard players remove @s bonus_insulation_cold 10
+execute if predicate bt:rain_check run scoreboard players add @s bonus_insulation_warm 10
+
+
+
 
 # Fire/furnace Bonus
 execute store result score @s campfires run clone ~-3 ~-2 ~-3 ~3 ~2 ~3 ~-3 ~-2 ~-3 filtered campfire[lit=true] force
@@ -134,9 +174,9 @@ execute if score @s temp_penalty_warm matches ..0 run scoreboard players set @s 
 execute if score @s temp_penalty_warm matches 1.. run function bt:temp_effects
 
 
-execute if score @s body_temp <= #0 constant run scoreboard players operation @s temp_penalty_cold = @s body_temp
-execute if score @s body_temp <= #0 constant run scoreboard players operation @s temp_penalty_cold += @s total_insulation_cold
-execute if score @s temp_penalty_cold matches 0.. run scoreboard players set @s temp_penalty_cold 0
+execute if score @s body_temp < #0 constant run scoreboard players operation @s temp_penalty_cold = @s body_temp
+execute if score @s body_temp < #0 constant run scoreboard players operation @s temp_penalty_cold += @s total_insulation_cold
+execute if score @s temp_penalty_cold matches ..0 run scoreboard players set @s temp_penalty_cold 0
 execute if score @s temp_penalty_cold matches ..1 run function bt:temp_effects
 
 

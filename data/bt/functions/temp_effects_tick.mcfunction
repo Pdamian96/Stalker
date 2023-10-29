@@ -24,9 +24,10 @@
 scoreboard players operation @s insulation_effect += @s temp_penalty_warm
 scoreboard players operation @s insulation_effect += @s temp_penalty_cold
 
+# slowly return to normal temp if no penalty is present
 
-
-
+execute if score @s temp_penalty_warm matches 0 if score @s insulation_effect matches 0.. run scoreboard players remove @s insulation_effect 15
+execute if score @s temp_penalty_cold matches 0 if score @s insulation_effect matches ..0 run scoreboard players add @s insulation_effect 15
 
 
 

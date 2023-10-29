@@ -8,8 +8,14 @@ function bt:loop_5s
 
 
 
+#|-------------------|
+#| Setup Scoreboards |
+#|-------------------|
 
-# Setup Scoreboards
+#
+scoreboard objectives add sleep_time minecraft.custom:sleep_in_bed
+scoreboard objectives add time_since_sleep minecraft.custom:time_since_rest
+scoreboard objectives add playtime minecraft.custom:play_time
 
 scoreboard objectives add random dummy
 scoreboard objectives add math dummy
