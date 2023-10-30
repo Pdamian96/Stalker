@@ -3,12 +3,12 @@
 function thirst:load
 
 
-schedule clear bt:loop_5s
+schedule clear main:loop_5s
 
 
 # Start scheduled functions
 
-function bt:loop_5s
+function main:loop_5s
 
 
 

@@ -167,18 +167,17 @@ scoreboard players operation @s total_insulation_warm += @s bonus_insulation_war
 
 # Insulation Rest Calculations
 
-
+execute if score @s body_temp matches ..0 run scoreboard players set @s temp_penalty_warm 0
 execute if score @s body_temp > #0 constant run scoreboard players operation @s temp_penalty_warm = @s body_temp
 execute if score @s body_temp > #0 constant run scoreboard players operation @s temp_penalty_warm -= @s total_insulation_warm
 execute if score @s temp_penalty_warm matches ..0 run scoreboard players set @s temp_penalty_warm 0
 execute if score @s temp_penalty_warm matches 1.. run function bt:temp_effects
 
-
+execute if score @s body_temp matches 0.. run scoreboard players set @s temp_penalty_cold 0
 execute if score @s body_temp < #0 constant run scoreboard players operation @s temp_penalty_cold = @s body_temp
 execute if score @s body_temp < #0 constant run scoreboard players operation @s temp_penalty_cold += @s total_insulation_cold
-execute if score @s temp_penalty_cold matches ..0 run scoreboard players set @s temp_penalty_cold 0
-execute if score @s temp_penalty_cold matches ..1 run function bt:temp_effects
-
+execute if score @s temp_penalty_cold matches 0.. run scoreboard players set @s temp_penalty_cold 0
+execute if score @s temp_penalty_cold matches ..-1 run function bt:temp_effects
 
 
 
