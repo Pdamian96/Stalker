@@ -1,10 +1,31 @@
 
+
+function thirst:load
+
+
 schedule clear bt:loop_5s
 
 
 # Start scheduled functions
 
 function bt:loop_5s
+
+
+
+
+
+# Unicode Characters
+#
+#  - fire
+#  - Ice
+#  - tempscale warm
+#  - tempscale cold
+#
+
+
+
+
+
 
 
 
