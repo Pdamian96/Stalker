@@ -23,14 +23,21 @@
 
 
 #
-# 10 over - More thirst 
+# 5 over - More thirst 
 #
+
+execute if score @s temp_penalty_warm matches 5..9 run tag @s add t_db_w1
+execute if score @s temp_penalty_warm matches 5..9 run tag @s remove t_db_w2
+#t_db_w1 = thirst_debuff_water1
+
 
 # ///Thirst system not in place///
 
 #
-# 20 over warm - More Thirst
+# 10 over warm - More Thirst
 #
+execute if score @s temp_penalty_warm matches 10.. run tag @s add t_db_w2
+execute if score @s temp_penalty_warm matches 10.. run tag @s remove t_db_w1
 
 # ///Thirst system still not in place///
 

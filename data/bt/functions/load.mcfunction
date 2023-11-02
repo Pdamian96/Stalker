@@ -68,11 +68,15 @@ scoreboard objectives add temp_penalty_warm dummy
 scoreboard objectives add temp_penalty_cold dummy
 
 
-
+scoreboard objectives add movement_s minecraft.custom:sprint_one_cm
+scoreboard objectives add movement_w minecraft.custom:walk_one_cm
+scoreboard objectives add movement_total dummy
 
 
 scoreboard objectives add time dummy
 
+
+scoreboard objectives add potion.used minecraft.used:potion
 
 #
 # Set everyones Insulation

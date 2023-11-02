@@ -32,6 +32,11 @@ execute if score @s temp_penalty_cold matches 0 if score @s insulation_effect ma
 
 
 
+# if player too hot do rare damage
+execute if score @s temp_penalty_warm matches 10.. run execute store result score @s random run random value 1..5
+execute if score @s temp_penalty_warm matches 10.. run execute if score @s random matches 1 run damage @s 0.5 cramming
+
+
 
 
 
