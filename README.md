@@ -13,4 +13,7 @@ Thirst, Body Temperature, New Crafting system, *guns*, Artifacts, Radiation, New
 So yeah, lots to do.
 
 Current in Progress:
-Body Temperature System
+Body Temperature System, Thirst,
+
+Basically done:
+Body temperature System
